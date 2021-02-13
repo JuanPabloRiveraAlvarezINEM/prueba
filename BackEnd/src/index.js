@@ -6,7 +6,7 @@ const app = express()
 
 //middlewares
 app.use(morgan('dev'))
-app.use(cors())
+app.use(cors('*'))
 app.use(express.json())
 app.use(express.urlencoded())
 
