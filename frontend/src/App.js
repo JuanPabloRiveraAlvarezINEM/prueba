@@ -2,6 +2,7 @@ import './App.css';
 import Login from './components/login'
 import Holamundo from './components/holamundo'
 import Insertar from './components/insertar'
+import Insertaru from './components/usuarios'
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,8 +23,11 @@ function App() {
         <Route path="/insertar"> 
           <Insertar/>
         </Route>
+        <Route path="/insertaru">
+          <Insertaru/>
+        </Route>
       </Switch>
-    </Router>
+     </Router>
   );
 }
 

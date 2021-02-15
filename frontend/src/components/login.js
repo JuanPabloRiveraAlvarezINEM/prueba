@@ -16,17 +16,28 @@ function Login(){
   const[enlace, setEnlace] = useState('/')
 
   useEffect(()=>{
-    if(cookies.get('correo') && cookies.get('pass')) window.location.href='/holamundo' 
+    if(cookies.get('correo') && cookies.get('pass')) window.location.href='/tareas' 
   })
+
+  const registrar = (event)=>{
+       event.preventDefault()
+       window.location.href="/insertaru"
+  }
 
   const validar = async (event) => {
     event.preventDefault()
     const {data} = await axios.get(url) 
     for (const i in data)
       if(data[i].correo == Correo && data[i].pass == Pass){
-       cookies.set('correo', data[i].correo)
-       cookies.set('pass', data[i].pass)
-       window.location.href="/tareas"
+        if(data[i].correo == null && data[i].pass == null){
+          alert("Ingrese datos")
+          break;
+        }else{
+          cookies.set('correo', data[i].correo)
+          cookies.set('pass', data[i].pass)
+          alert("hola")
+          window.location.href="/tareas"
+        }
       } 
   }
 
@@ -53,6 +64,9 @@ function Login(){
           </Form.Group>
           <Button onClick={validar}  variant="primary" type="submit">
             ingresar
+          </Button>
+          <Button onClick={registrar} className="registrar" variant="primary" type="submit">
+            registrar
           </Button>
       </Form>
       </div>

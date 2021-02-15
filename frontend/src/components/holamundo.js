@@ -21,7 +21,7 @@ function eliminar(){
   }
 
 function insertar(){
-    window.location.href='insertar'
+    window.location.href='/insertar'
 }
 
 class Main extends React.Component{
@@ -31,6 +31,7 @@ class Main extends React.Component{
   }
 
   componentDidMount(){
+    if(!cookies.get('correo') || cookies.get('correo')== null)window.location.href="/"
     console.log(cookies.get('correo'))
     const url = 'http://localhost:5000/tareas/'+cookies.get('correo')
     console.log(url)
