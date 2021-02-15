@@ -12,6 +12,9 @@ app.use(express.urlencoded())
 
 //rutas
 app.use(require('./routes/iniciar_sesion'))
+app.use(require('./routes/get_tareas'))
+app.use(require('./routes/eliminar_tareas'))
+app.use(require('./routes/crear_tarea'))
 
 app.set('port',5000)
 app.listen(app.get('port'), ()=>{

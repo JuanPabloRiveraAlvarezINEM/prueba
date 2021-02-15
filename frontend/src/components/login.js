@@ -1,8 +1,9 @@
 import axios from 'axios'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Form,Button} from 'react-bootstrap'
 import '../styles/login.css'
 import Cookies from 'universal-cookie'
+import {Link} from 'react-router-dom'
 
 function Login(){
 
@@ -12,14 +13,21 @@ function Login(){
   const[Correo,setCorreo] = useState()
   const[Pass,setPass] = useState()
   const[estado,setEstado] = useState('estado')
+  const[enlace, setEnlace] = useState('/')
 
-  const validar = async () => {
+  useEffect(()=>{
+    if(cookies.get('correo') && cookies.get('pass')) window.location.href='/holamundo' 
+  })
+
+  const validar = async (event) => {
     event.preventDefault()
     const {data} = await axios.get(url) 
-    if(data[0].correo == Correo && data[0].pass == Pass){
-      cookies.set('correo', data[0].correo)
-      cookies.set('pass', data[0].correo)
-    } 
+    for (const i in data)
+      if(data[i].correo == Correo && data[i].pass == Pass){
+       cookies.set('correo', data[i].correo)
+       cookies.set('pass', data[i].pass)
+       window.location.href="/tareas"
+      } 
   }
 
   return(
@@ -28,7 +36,7 @@ function Login(){
         <h2>Aplicacion</h2> 
       </div>
       <div className="contenedor1">
-        <Form onSubmit={validar}>
+        <Form >
           <Form.Group controlId="formBasicEmail">
            <Form.Label>Correo</Form.Label>
            <Form.Control 
@@ -43,11 +51,10 @@ function Login(){
               onChange = {(e)=>{setPass(e.target.value)}}
             />
           </Form.Group>
-        <Button variant="primary" type="submit">
-        ingresar
-        </Button>
+          <Button onClick={validar}  variant="primary" type="submit">
+            ingresar
+          </Button>
       </Form>
-      <p>{estado}</p>
       </div>
     </div>
   )
