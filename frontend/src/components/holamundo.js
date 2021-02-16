@@ -4,6 +4,8 @@ import {Form,Button,Card, Row, Col} from 'react-bootstrap'
 import '../styles/main.css'
 
 const cookies = new Cookies()
+const hoy = new Date()
+const fech = hoy.getDate()+'-'+(hoy.getMonth()+1)+'-'+hoy.getFullYear()
 
 function cerrar(){
     cookies.remove('correo')
@@ -22,6 +24,10 @@ function eliminar(){
 
 function insertar(){
     window.location.href='/insertar'
+}
+
+function editar(){
+    window.location.href='/editar'
 }
 
 class Main extends React.Component{
@@ -53,7 +59,14 @@ class Main extends React.Component{
           <Card.Text>
             {e.descripcion}
           </Card.Text>
+          <Card.Text>
+            {e.prioridad}
+          </Card.Text>
+          <Card.Text>
+            {e.fecha}
+          </Card.Text>
           <Button onClick={cookies.set('id',e._id), eliminar} variant="danger">Eliminar</Button>
+          <Button onClick={cookies.set('id',e._id), editar} className="editar" variant="primary">Editar</Button>
         </Card.Body>
       </Card>
           )}

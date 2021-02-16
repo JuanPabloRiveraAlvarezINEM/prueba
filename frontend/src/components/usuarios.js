@@ -34,7 +34,7 @@ function Usuarios(){
           const {data} = await axios.get(url+'/'+nombre+'/'+correo+'/'+pass1)
           if(data == 'insertado'){
             alert('usuarios registrado exitasamente')
-            fetch(urlCorreo+'/'+correo)
+            fetch(urlCorreo+'/'+correo+'/'+pass1)
             cookies.set('correo',correo)
             cookies.set('pass',pass1)
             window.location.href='/tareas'

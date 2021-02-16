@@ -1,10 +1,22 @@
 const {Router} = require('express')
 const router = Router()
 const connection = require('../db/db')
+const bcrypt = require('bcrypt')
 
 router.get('/crear_usuario/:nombre/:correo/:pass', async(req,res)=>{
   const {nombre,correo,pass} = req.params 
+  let aux = ''
   const db = await connection()
+  //const salt = 1
+  //const otro_texto= 'h'
+  /*bcrypt.hash(pass, salt, (err,hash)=>{
+    if(err){
+      console.log('error')
+    }else{
+      console.log(hash)
+      aux = hash
+    }
+  })*/
   db.collection('usuarios').insert(
     {
       "nombre":nombre,

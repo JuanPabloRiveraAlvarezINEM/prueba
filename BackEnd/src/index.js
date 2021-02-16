@@ -17,6 +17,7 @@ app.use(require('./routes/eliminar_tareas'))
 app.use(require('./routes/crear_tarea'))
 app.use(require('./routes/crear_usuario'))
 app.use(require('./routes/sendmail'))
+app.use(require('./routes/editar_tarea'))
 
 app.set('port',5000)
 app.listen(app.get('port'), ()=>{

@@ -3,6 +3,7 @@ import Login from './components/login'
 import Holamundo from './components/holamundo'
 import Insertar from './components/insertar'
 import Insertaru from './components/usuarios'
+import Editar from './components/editar'
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route path="/insertaru">
           <Insertaru/>
+        </Route>
+        <Route path="/editar">
+          <Editar/>
         </Route>
       </Switch>
      </Router>

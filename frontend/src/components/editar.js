@@ -1,32 +1,37 @@
 import React,{useEffect,useState} from 'react'
+import Cookies from 'universal-cookie'
 import {Form, Button} from 'react-bootstrap'
 import axios from 'axios'
-import '../styles/insertar.css'
-import Cookies from 'universal-cookie'
 
-function Insertar(){
+function Editar(){
 
   const cookies = new Cookies()
-  const url = 'http://localhost:5000/crear_tarea'
-  const urlCorreo = 'http://localhost:5000/sendmail'
-
+  
+  const url = 'http://localhost:5000/editar'
+  
   const[titulo,setTitulo] = useState()
   const[prioridad,setPrioridad] = useState()
   const[descripcion,setDescripcion] = useState()
   const[fecha,setFecha] = useState()
 
-  useEffect(()=>{
-    if(!cookies.get('correo') && !cookies.get('pass')) window.location.href='/' 
-  })
+  const cancelar = async(event)=>{
+    event.preventDefault()
+    window.location.href="/tareas"
+  }
 
-  const insertar = async(event)=>{
+  useEffect(()=>{
+    if(!cookies.get('correo')){
+      window.location.href='/'
+    }
+  })
+  
+  const editar = async(event)=>{
     event.preventDefault()
     if(titulo && prioridad && descripcion && fecha){
       alert(fecha)
-      const {data} = await axios.get(url+'/'+titulo+'/'+descripcion+'/'+prioridad+'/'+fecha+'/'+cookies.get('correo')) 
+      const {data} = await axios.get(url+'/'+cookies.get('id')+'/'+titulo+'/'+descripcion+'/'+prioridad+'/'+fecha+'/'+cookies.get('correo')) 
       if(data){
-        alert("ingresado con exito")
-        //const {data} = await axios.get()
+        alert("editado con exito")
         window.location.href='/tareas'
       }else{
         alert("error")
@@ -35,13 +40,8 @@ function Insertar(){
       alert("Faltan datos")
     }
   }
-  
-  const cancelar = async(event)=>{
-    event.preventDefault()
-    window.location.href="/tareas"
-  }
 
- return(
+  return(
   <div className="Contenedor">
     <Form>
      <Form.Group>
@@ -66,11 +66,11 @@ function Insertar(){
        <Form.Text className="text-muted">
        </Form.Text>
      </Form.Group>
-    <Button onClick={insertar} className="insertar" variant="primary">insertar</Button>
+    <Button onClick={editar} className="insertar" variant="primary">editar</Button>
     <Button onClick={cancelar} className="cancelar" variant="danger">Cancelar</Button>
    </Form>
   </div>
- )
+  )
 }
 
-export default Insertar
+export default Editar
