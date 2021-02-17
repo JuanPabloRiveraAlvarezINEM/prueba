@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react'
 import {Button, Form} from 'react-bootstrap'
 import axios from 'axios'
@@ -35,9 +36,7 @@ function Usuarios(){
           if(data == 'insertado'){
             alert('usuarios registrado exitasamente')
             fetch(urlCorreo+'/'+correo+'/'+pass1)
-            cookies.set('correo',correo)
-            cookies.set('pass',pass1)
-            window.location.href='/tareas'
+            window.location.href='/'
           }
         }
       }

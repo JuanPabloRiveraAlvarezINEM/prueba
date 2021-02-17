@@ -20,9 +20,7 @@ function Editar(){
   }
 
   useEffect(()=>{
-    if(!cookies.get('correo')){
-      window.location.href='/'
-    }
+    if(!cookies.get('token') || cookies.get('token')== null)window.location.href="/"
   })
   
   const editar = async(event)=>{

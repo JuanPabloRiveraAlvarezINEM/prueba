@@ -16,7 +16,7 @@ function Insertar(){
   const[fecha,setFecha] = useState()
 
   useEffect(()=>{
-    if(!cookies.get('correo') && !cookies.get('pass')) window.location.href='/' 
+    if(!cookies.get('token') || cookies.get('token')== null)window.location.href="/"
   })
 
   const insertar = async(event)=>{

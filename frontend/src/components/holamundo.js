@@ -17,7 +17,6 @@ function eliminar(){
       console.log('entrentroo')
       const id = cookies.get('id')
       const eli = 'http://localhost:5000/eliminar/'+id 
-      console.log('eliminar')
       fetch(eli)
       window.location.reload()
   }
@@ -37,8 +36,7 @@ class Main extends React.Component{
   }
 
   componentDidMount(){
-    if(!cookies.get('correo') || cookies.get('correo')== null)window.location.href="/"
-    console.log(cookies.get('correo'))
+    if(!cookies.get('token') || cookies.get('token')== null)window.location.href="/"
     const url = 'http://localhost:5000/tareas/'+cookies.get('correo')
     console.log(url)
     fetch(url)

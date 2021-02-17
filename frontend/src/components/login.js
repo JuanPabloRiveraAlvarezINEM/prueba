@@ -25,20 +25,21 @@ function Login(){
   }
 
   const validar = async (event) => {
-    event.preventDefault()
-    const {data} = await axios.get(url) 
-    for (const i in data)
-      if(data[i].correo == Correo && data[i].pass == Pass){
-        if(data[i].correo == null && data[i].pass == null){
-          alert("Ingrese datos")
-          break;
-        }else{
-          cookies.set('correo', data[i].correo)
-          cookies.set('pass', data[i].pass)
-          alert("hola")
-        }
-      } 
+    if(Correo && Pass){ 
+    event.preventDefault() 
+    const {data} = await axios.get(url+'/'+Correo+'/'+Pass) 
+        if(data){
+          if(data != 'noentro'){
+            alert(data.token)
+            cookies.set('token', data.token)
+            window.location.href='/tareas'
+          }else{
+            alert("credneciales no registradas")
+          }
+    } 
+    }
   }
+  
 
   return(
     <div>

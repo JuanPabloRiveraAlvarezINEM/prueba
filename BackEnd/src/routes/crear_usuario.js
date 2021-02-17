@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 
 router.get('/crear_usuario/:nombre/:correo/:pass', async(req,res)=>{
   const {nombre,correo,pass} = req.params 
+  console.log(pass)
   let aux = ''
   const db = await connection()
   //const salt = 1
