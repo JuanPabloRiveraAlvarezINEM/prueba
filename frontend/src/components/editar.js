@@ -61,7 +61,7 @@ function Editar(){
        <Form.Control onChange={(e)=>{setDescripcion(e.target.value)}} as="textarea" rows={3} required/>
      </Form.Group>
      <Form.Group>
-       <Form.Label>Prioridad</Form.Label>
+       <Form.Label>Fecha</Form.Label>
        <Form.Control onChange={(e)=>{setFecha(e.target.value)}} type="date" required />
        <Form.Text className="text-muted">
        </Form.Text>

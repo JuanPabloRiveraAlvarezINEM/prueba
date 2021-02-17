@@ -36,7 +36,6 @@ function Login(){
           cookies.set('correo', data[i].correo)
           cookies.set('pass', data[i].pass)
           alert("hola")
-          window.location.href="/tareas"
         }
       } 
   }
