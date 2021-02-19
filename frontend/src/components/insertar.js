@@ -23,7 +23,7 @@ function Insertar(){
     event.preventDefault()
     if(titulo && prioridad && descripcion && fecha){
       alert(fecha)
-      const {data} = await axios.get(url+'/'+titulo+'/'+descripcion+'/'+prioridad+'/'+fecha+'/'+cookies.get('correo')) 
+      const {data} = await axios.get(url+'/'+titulo+'/'+descripcion+'/'+prioridad+'/'+fecha+'/'+cookies.get('correo')+'/'+cookies.get('token')+'/'+cookies.get('pass')) 
       if(data){
         alert("ingresado con exito")
         //const {data} = await axios.get()

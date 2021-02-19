@@ -23,13 +23,15 @@ function Editar(){
     if(!cookies.get('token') || cookies.get('token')== null)window.location.href="/"
   })
   
+
   const editar = async(event)=>{
     event.preventDefault()
     if(titulo && prioridad && descripcion && fecha){
       alert(fecha)
-      const {data} = await axios.get(url+'/'+cookies.get('id')+'/'+titulo+'/'+descripcion+'/'+prioridad+'/'+fecha+'/'+cookies.get('correo')) 
+      const {data} = await axios.get(url+'/'+cookies.get('id')+'/'+titulo+'/'+descripcion+'/'+prioridad+'/'+fecha+'/'+cookies.get('correo')+'/'+cookies.get('pass')+'/'+cookies.get('token')) 
       if(data){
         alert("editado con exito")
+        cookies.remove('id')
         window.location.href='/tareas'
       }else{
         alert("error")

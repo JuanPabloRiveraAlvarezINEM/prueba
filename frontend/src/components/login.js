@@ -16,7 +16,7 @@ function Login(){
   const[enlace, setEnlace] = useState('/')
 
   useEffect(()=>{
-    if(cookies.get('correo') && cookies.get('pass')) window.location.href='/tareas' 
+    if(cookies.get('token')) window.location.href='/tareas' 
   })
 
   const registrar = (event)=>{
@@ -30,8 +30,12 @@ function Login(){
     const {data} = await axios.get(url+'/'+Correo+'/'+Pass) 
         if(data){
           if(data != 'noentro'){
-            alert(data.token)
             cookies.set('token', data.token)
+            cookies.set('correo',Correo)
+            cookies.set('pass',Pass)
+            console.log(data.token)
+            alert(data.token)
+            alert(cookies.get('correo'))
             window.location.href='/tareas'
           }else{
             alert("credneciales no registradas")

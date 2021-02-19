@@ -8,7 +8,7 @@ const app = express()
 app.use(morgan('dev'))
 app.use(cors('*'))
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended:false}))
 
 //rutas
 app.use(require('./routes/iniciar_sesion'))

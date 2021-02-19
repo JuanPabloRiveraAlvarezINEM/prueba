@@ -8,26 +8,29 @@ const hoy = new Date()
 const fech = hoy.getDate()+'-'+(hoy.getMonth()+1)+'-'+hoy.getFullYear()
 
 function cerrar(){
-    cookies.remove('correo')
-    cookies.remove('pass')
+    cookies.remove('token')
     window.location.href='/'
 }
   
-function eliminar(){
+/*const eliminar = function(id){
       console.log('entrentroo')
       const id = cookies.get('id')
       const eli = 'http://localhost:5000/eliminar/'+id 
       fetch(eli)
       window.location.reload()
   }
+  */
 
 function insertar(){
     window.location.href='/insertar'
 }
 
-function editar(){
+const editar =  function(id){
+    alert(id)
+    cookies.set('id',id)
+    alert("h")
     window.location.href='/editar'
-}
+  }
 
 class Main extends React.Component{
 
@@ -37,7 +40,7 @@ class Main extends React.Component{
 
   componentDidMount(){
     if(!cookies.get('token') || cookies.get('token')== null)window.location.href="/"
-    const url = 'http://localhost:5000/tareas/'+cookies.get('correo')
+    const url = 'http://localhost:5000/tareas/'+cookies.get('correo')+'/'+cookies.get('pass')+'/'+cookies.get('token')
     console.log(url)
     fetch(url)
     .then(res => res.json())
@@ -63,8 +66,8 @@ class Main extends React.Component{
           <Card.Text>
             {e.fecha}
           </Card.Text>
-          <Button onClick={cookies.set('id',e._id), eliminar} variant="danger">Eliminar</Button>
-          <Button onClick={cookies.set('id',e._id), editar} className="editar" variant="primary">Editar</Button>
+          <Button variant="danger">Eliminar</Button>
+          <Button onClick={()=>{editar(e._id)}} className="editar" variant="primary">Editar</Button>
         </Card.Body>
       </Card>
           )}
