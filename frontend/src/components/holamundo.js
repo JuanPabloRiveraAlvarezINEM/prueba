@@ -12,14 +12,14 @@ function cerrar(){
     window.location.href='/'
 }
   
-/*const eliminar = function(id){
-      console.log('entrentroo')
+const eliminar = function(id){
+      cookies.set('id',id)
       const id = cookies.get('id')
       const eli = 'http://localhost:5000/eliminar/'+id 
       fetch(eli)
       window.location.reload()
-  }
-  */
+}
+
 
 function insertar(){
     window.location.href='/insertar'
@@ -66,7 +66,7 @@ class Main extends React.Component{
           <Card.Text>
             {e.fecha}
           </Card.Text>
-          <Button variant="danger">Eliminar</Button>
+          <Button onClick={()=>{eliminar(e._id)}} variant="danger">Eliminar</Button>
           <Button onClick={()=>{editar(e._id)}} className="editar" variant="primary">Editar</Button>
         </Card.Body>
       </Card>
