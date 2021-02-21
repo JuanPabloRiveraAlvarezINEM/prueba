@@ -3,21 +3,18 @@ const router = Router()
 const connection = require('../db/db')
 const jwt = require('jsonwebtoken')
 
-router.get('/crear_tarea/:titulo/:descripcion/:prioridad/:fecha/:correo/:token/:pass', async(req,res)=>{
+router.post('/crear_tarea', async(req,res)=>{
 
-    const {titulo,descripcion,prioridad,fecha,correo} = req.params 
-    const {token} = req.params
-    const {pass} = req.params
+  const {titulo,descripcion,prioridad,fecha,correo,token,pass} = req.body 
 
-    if(!token){
-       res.send('no hay token')
-    }else{
-      try{
-        const deco = jwt.verify(token,'clave')
-        if(deco.pass == pass){
-
-          const db = await connection()
-          db.collection('tareas').insert(
+  if(!token){
+    res.send('no hay token')
+  }else{
+    try{
+      const deco = jwt.verify(token,'clave')
+      if(deco.pass == pass){
+        const db = await connection()
+        db.collection('tareas').insert(
           {
             "titulo":titulo,
             "descripcion":descripcion,
@@ -31,12 +28,12 @@ router.get('/crear_tarea/:titulo/:descripcion/:prioridad/:fecha/:correo/:token/:
             }else{
               res.send('insertado')
             }
-        })
-        }
-      }catch{
-        res.send('error')
+          })
       }
+    }catch{
+      res.send('error')
     }
+  }
 })
 
 module.exports = router

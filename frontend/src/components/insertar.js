@@ -8,7 +8,6 @@ function Insertar(){
 
   const cookies = new Cookies()
   const url = 'http://localhost:5000/crear_tarea'
-  const urlCorreo = 'http://localhost:5000/sendmail'
 
   const[titulo,setTitulo] = useState()
   const[prioridad,setPrioridad] = useState()
@@ -22,11 +21,17 @@ function Insertar(){
   const insertar = async(event)=>{
     event.preventDefault()
     if(titulo && prioridad && descripcion && fecha){
-      alert(fecha)
-      const {data} = await axios.get(url+'/'+titulo+'/'+descripcion+'/'+prioridad+'/'+fecha+'/'+cookies.get('correo')+'/'+cookies.get('token')+'/'+cookies.get('pass')) 
+      const {data} = await axios.post(url,{
+        titulo,
+        descripcion,
+        prioridad,
+        fecha,
+        correo: cookies.get('correo'),
+        pass: cookies.get('pass'),
+        token: cookies.get('token'),
+      }) 
       if(data){
         alert("ingresado con exito")
-        //const {data} = await axios.get()
         window.location.href='/tareas'
       }else{
         alert("error")

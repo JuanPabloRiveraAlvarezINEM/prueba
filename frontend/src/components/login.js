@@ -3,7 +3,6 @@ import React, {useState, useEffect} from 'react'
 import {Form,Button} from 'react-bootstrap'
 import '../styles/login.css'
 import Cookies from 'universal-cookie'
-import {Link} from 'react-router-dom'
 
 function Login(){
 
@@ -12,8 +11,6 @@ function Login(){
 
   const[Correo,setCorreo] = useState()
   const[Pass,setPass] = useState()
-  const[estado,setEstado] = useState('estado')
-  const[enlace, setEnlace] = useState('/')
 
   useEffect(()=>{
     if(cookies.get('token')) window.location.href='/tareas' 
@@ -34,8 +31,6 @@ function Login(){
             cookies.set('correo',Correo)
             cookies.set('pass',Pass)
             console.log(data.token)
-            alert(data.token)
-            alert(cookies.get('correo'))
             window.location.href='/tareas'
           }else{
             alert("credneciales no registradas")

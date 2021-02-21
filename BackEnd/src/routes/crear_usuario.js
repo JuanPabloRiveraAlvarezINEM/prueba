@@ -1,35 +1,34 @@
-const {Router} = require('express')
+const {Router, text} = require('express')
 const router = Router()
 const connection = require('../db/db')
 const bcrypt = require('bcrypt')
+const transporter = require('../mailer/mailer')
 
 router.get('/crear_usuario/:nombre/:correo/:pass', async(req,res)=>{
   const {nombre,correo,pass} = req.params 
   console.log(pass)
-  let aux = ''
   const db = await connection()
-  //const salt = 1
-  //const otro_texto= 'h'
-  /*bcrypt.hash(pass, salt, (err,hash)=>{
-    if(err){
-      console.log('error')
-    }else{
-      console.log(hash)
-      aux = hash
-    }
-  })*/
+  const salt = 1
+  const contrasena = await bcrypt.hash(pass, salt)
+  console.log(contrasena)
   db.collection('usuarios').insert(
     {
       "nombre":nombre,
       "correo":correo,
-      "pass":pass,
-      "confirmacion":"no"
+      "pass":contrasena
     },
-    (err,result)=>{
+    async(err,result)=>{
       if(err){
         res.send('error')
       }else{
         res.send('insertado')
+        const mail = await transporter.sendMail({
+          from: "mailerjuan0@gmail.com",
+          to:correo,
+          subject:'Aplicacion Tareas',
+          text:nombre+" Gracias por escoger nuestros serivcios"
+        })
+        console.log(mail)
       }
     }
   ) 

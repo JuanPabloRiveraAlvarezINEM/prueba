@@ -1,3 +1,0 @@
-module.expots = {
-   secret: 'secreto'
-}
